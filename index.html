@@ -1,0 +1,320 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>MoodAI - Play & Feel Better</title>
+    <link rel="stylesheet" href="styles.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/chessboard.js/1.0.0/css/chessboard.min.css" />
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/chess.js/0.12.0/chess.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/chessboard.js/1.0.0/js/chessboard.min.js"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+</head>
+
+<body>
+    <!-- Animated Background -->
+    <div class="animated-bg"></div>
+    <div class="particles" id="particles"></div>
+
+    <!-- Loading Screen -->
+    <div class="loading" id="loading">
+        <div class="loading-spinner"></div>
+    </div>
+
+    <div class="container">
+        <header>
+            <h1>MoodAI</h1>
+            <p>Your Personal Mood Motivator</p>
+        </header>
+
+        <main>
+            <div id="board" style="width: 400px"></div>
+            <p id="status"></p>
+
+            <!-- Mood Input Section -->
+            <section class="mood-section">
+                <h2>How are you feeling today?</h2>
+                <div class="mood-options">
+                    <button class="mood-btn" data-mood="happy">😊 Happy</button>
+                    <button class="mood-btn" data-mood="excited">🎉 Excited</button>
+                    <button class="mood-btn" data-mood="enthusiastic">✨ Enthusiastic</button>
+                    <button class="mood-btn" data-mood="calm">😌 Calm</button>
+                    <button class="mood-btn" data-mood="content">😊 Content</button>
+                    <button class="mood-btn" data-mood="sad">😢 Sad</button>
+                    <button class="mood-btn" data-mood="anxious">😰 Anxious</button>
+                    <button class="mood-btn" data-mood="angry">😠 Angry</button>
+                    <button class="mood-btn" data-mood="fearful">😨 Fearful</button>
+                    <button class="mood-btn" data-mood="lonely">😔 Lonely</button>
+                    <button class="mood-btn" data-mood="bored">😑 Bored</button>
+                    <button class="mood-btn" data-mood="frustrated">😤 Frustrated</button>
+                    <button class="mood-btn" data-mood="melancholy">😔 Melancholy</button>
+                    <button class="mood-btn" data-mood="stressed">
+                        <span class="mood-emoji">😰</span>
+                        <span class="mood-text">Stressed</span>
+                    </button>
+                    <button class="mood-btn" data-mood="energetic">
+                        <span class="mood-emoji">⚡</span>
+                        <span class="mood-text">Energetic</span>
+                    </button>
+                    <button class="mood-btn" data-mood="tired">
+                        <span class="mood-emoji">😴</span>
+                        <span class="mood-text">Tired</span>
+                    </button>
+                </div>
+                <div class="pet-avatar-container">
+                    <div class="pet-avatar">
+                        <div class="pet-body">
+                            <div class="pet-face">
+                                <div class="pet-eyes">
+                                    <div class="pet-eye left"></div>
+                                    <div class="pet-eye right"></div>
+                                </div>
+                                <div class="pet-mouth"></div>
+                            </div>
+                            <div class="pet-ears">
+                                <div class="pet-ear left"></div>
+                                <div class="pet-ear right"></div>
+                            </div>
+                        </div>
+                        <div class="pet-tail"></div>
+                    </div>
+                    <div class="pet-status">Your Mood Pet</div>
+                </div>
+                <div id="mood-result" class="mood-result"></div>
+            </section>
+
+            <!-- Mood Data Display Section -->
+            <section class="output-section">
+                <div class="output-card">
+                    <h3>Summary</h3>
+                    <p id="summaryText"></p>
+                </div>
+                <div class="output-card">
+                    <h3>Quote</h3>
+                    <p id="quoteText"></p>
+                </div>
+                <div class="output-card">
+                    <h3>Mood Image</h3>
+                    <img id="moodImage" src="https://via.placeholder.com/400x300?text=Select+a+Mood" alt="Mood Image">
+                </div>
+                <div class="output-card">
+                    <h3>Recommended Videos</h3>
+                    <div class="video-container">
+                        <div id="videoPlayer" class="video-player">
+                            <a id="moodVideo" href="#" target="_blank" class="video-link">
+                                <div class="video-thumbnail">
+                                    <img src="" alt="Video thumbnail" id="videoThumbnail">
+                                    <div class="play-button">▶</div>
+                                </div>
+                            </a>
+                        </div>
+                    </div>
+                </div>
+                <div class="output-card journal-card">
+                    <h3>Mood Journal</h3>
+                    <div class="journal-container">
+                        <textarea id="moodJournal" placeholder="Write about your feelings here..."></textarea>
+                        <div class="journal-controls">
+                            <button id="saveJournal" class="journal-btn">Save Entry</button>
+                            <button id="clearJournal" class="journal-btn">Clear Journal</button>
+                        </div>
+                        <div id="journalHistory" class="journal-history"></div>
+                    </div>
+                </div>
+                <div class="output-card calendar-card">
+                    <h3>Mood Calendar</h3>
+                    <div class="calendar-container">
+                        <div class="calendar-header">
+                            <button id="prevMonth" class="calendar-btn">←</button>
+                            <h4 id="currentMonth"></h4>
+                            <button id="nextMonth" class="calendar-btn">→</button>
+                        </div>
+                        <div class="calendar-grid">
+                            <div class="weekday">Sun</div>
+                            <div class="weekday">Mon</div>
+                            <div class="weekday">Tue</div>
+                            <div class="weekday">Wed</div>
+                            <div class="weekday">Thu</div>
+                            <div class="weekday">Fri</div>
+                            <div class="weekday">Sat</div>
+                        </div>
+                        <div id="calendarDays" class="calendar-days"></div>
+                        <div class="mood-legend">
+                            <div class="legend-item"><span class="mood-color happy"></span> Happy</div>
+                            <div class="legend-item"><span class="mood-color sad"></span> Sad</div>
+                            <div class="legend-item"><span class="mood-color anxious"></span> Anxious</div>
+                            <div class="legend-item"><span class="mood-color angry"></span> Angry</div>
+                            <div class="legend-item"><span class="mood-color calm"></span> Calm</div>
+                            <div class="legend-item"><span class="mood-color neutral"></span> No Entry</div>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Game Suggestions Section -->
+            <section class="games-section">
+                <h2>Suggested Games for Your Mood</h2>
+                <div class="game-list">
+                    <!-- Tic-Tac-Toe -->
+                    <div class="game-card" data-game="tictactoe">
+                        <h3>Tic-Tac-Toe</h3>
+                        <p>A quick, fun classic!</p>
+                        <button class="play-btn">Play Now</button>
+                    </div>
+                    <!-- Memory Match -->
+                    <div class="game-card" data-game="memory">
+                        <h3>Memory Match</h3>
+                        <p>Test your memory!</p>
+                        <button class="play-btn">Play Now</button>
+                    </div>
+                    <!-- Snake -->
+                    <div class="game-card" data-game="snake">
+                        <h3>Snake</h3>
+                        <p>Classic arcade fun!</p>
+                        <button class="play-btn">Play Now</button>
+                    </div>
+                    <!-- Rock Paper Scissors -->
+                    <div class="game-card" data-game="rps">
+                        <h3>Rock Paper Scissors</h3>
+                        <p>Quick decision game!</p>
+                        <button class="play-btn">Play Now</button>
+                    </div>
+                </div>
+            </section>
+
+            <!-- AI Chat Section -->
+            <section class="chat-section">
+                <h2>MoodAI Assistant</h2>
+                <div class="chat-container">
+                    <div class="chat-messages" id="chat-messages">
+                        <div class="message bot">
+                            <div class="message-content">
+                                Hello! I'm your MoodAI Assistant. How can I help you today? You can ask me for:
+                                <ul>
+                                    <li>Daily advice</li>
+                                    <li>Relaxation tips</li>
+                                    <li>Activity suggestions</li>
+                                    <li>Mood improvement ideas</li>
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="chat-input-container">
+                        <input type="text" id="chat-input" placeholder="Type your message here..." />
+                        <button id="send-message">Send</button>
+                    </div>
+                    <div class="chat-suggestions">
+                        <button class="suggestion-btn" data-query="What should I do today?">What should I do today?</button>
+                        <button class="suggestion-btn" data-query="Give me relaxation tips">Relaxation tips</button>
+                        <button class="suggestion-btn" data-query="How can I improve my mood?">Improve my mood</button>
+                        <button class="suggestion-btn" data-query="Suggest an activity">Suggest activity</button>
+                    </div>
+                </div>
+            </section>
+
+            <nav class="nav-buttons">
+                <button class="nav-btn" onclick="window.location.href='stress.html'">Stress Relief</button>
+                <button class="nav-btn" onclick="window.location.href='food.html'">Mood Food</button>
+            </nav>
+        </main>
+
+        <!-- Game Modal -->
+        <div id="game-modal" class="modal">
+            <div class="modal-content">
+                <span class="close-btn">&times;</span>
+                <div id="game-container">
+                    <!-- Tic-Tac-Toe Game -->
+                    <div id="tictactoe" class="game-board">
+                        <h3>Tic-Tac-Toe</h3>
+                        <div class="board">
+                            <div class="cell" data-index="0"></div>
+                            <div class="cell" data-index="1"></div>
+                            <div class="cell" data-index="2"></div>
+                            <div class="cell" data-index="3"></div>
+                            <div class="cell" data-index="4"></div>
+                            <div class="cell" data-index="5"></div>
+                            <div class="cell" data-index="6"></div>
+                            <div class="cell" data-index="7"></div>
+                            <div class="cell" data-index="8"></div>
+                        </div>
+                        <p id="game-status">Player X's Turn</p>
+                        <button id="reset-game">Reset Game</button>
+                    </div>
+
+                    <!-- Memory Match Game -->
+                    <div id="memory" class="game-board">
+                        <h3>Memory Match</h3>
+                        <div class="memory-grid"></div>
+                        <p id="memory-status">Find matching pairs!</p>
+                        <button id="reset-memory">Reset Game</button>
+                    </div>
+
+                    <!-- Snake Game -->
+                    <div id="snake" class="game-board">
+                        <h3>Snake</h3>
+                        <canvas id="snake-canvas"></canvas>
+                        <p id="snake-status">Score: 0</p>
+                        <button id="reset-snake">Reset Game</button>
+                    </div>
+
+                    <!-- Rock Paper Scissors Game -->
+                    <div id="rps" class="game-board">
+                        <h3>Rock Paper Scissors</h3>
+                        <div class="rps-container">
+                            <div class="rps-score">
+                                <div class="player-score">
+                                    <span>You: </span>
+                                    <span id="player-score">0</span>
+                                </div>
+                                <div class="computer-score">
+                                    <span>Computer: </span>
+                                    <span id="computer-score">0</span>
+                                </div>
+                            </div>
+                            <div class="rps-choices">
+                                <button class="rps-btn" data-choice="rock">🪨</button>
+                                <button class="rps-btn" data-choice="paper">📄</button>
+                                <button class="rps-btn" data-choice="scissors">✂️</button>
+                            </div>
+                            <div class="rps-result">
+                                <p id="rps-status">Choose your move!</p>
+                            </div>
+                            <div class="rps-history">
+                                <h4>Last Round</h4>
+                                <p id="rps-history"></p>
+                            </div>
+                        </div>
+                        <button id="reset-rps">Reset Game</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <footer>
+        <p>© 2024 MoodAI - Play & Feel Better</p>
+    </footer>
+
+    <script src="script.js"></script>
+    <script>
+        // Create floating particles
+        function createParticles() {
+            const particlesContainer = document.getElementById('particles');
+            for (let i = 0; i < 50; i++) {
+                const particle = document.createElement('div');
+                particle.className = 'particle';
+                particle.style.left = Math.random() * 100 + '%';
+                particle.style.top = Math.random() * 100 + '%';
+                particle.style.animationDelay = Math.random() * 20 + 's';
+                particlesContainer.appendChild(particle);
+            }
+        }
+
+        // Hide loading screen when page is loaded
+        window.addEventListener('load', () => {
+            document.getElementById('loading').style.display = 'none';
+            createParticles();
+        });
+    </script>
+</body>
+</html> 

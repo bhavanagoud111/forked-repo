@@ -1,0 +1,105 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Stress Relief - MoodAI</title>
+    <link rel="stylesheet" href="stress.css">
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+</head>
+<body>
+    <!-- Animated Background -->
+    <div class="animated-bg"></div>
+    <div class="particles" id="particles"></div>
+
+    <div class="container">
+        <header>
+            <h1>Stress Relief Guide</h1>
+            <p>Take a deep breath and explore these stress-relief techniques</p>
+        </header>
+
+        <div class="stress-categories">
+            <div class="category-card" data-category="breathing">
+                <h2>Breathing Exercises</h2>
+                <div class="exercise-content">
+                    <div class="breathing-circle"></div>
+                    <p class="breathing-text">Breathe in... Breathe out...</p>
+                    <button id="startBreathing">Start Exercise</button>
+                </div>
+            </div>
+
+            <div class="category-card" data-category="meditation">
+                <h2>Quick Meditation</h2>
+                <div class="exercise-content">
+                    <div class="meditation-timer">5:00</div>
+                    <p>Take a moment to clear your mind</p>
+                    <button id="startMeditation">Start Meditation</button>
+                </div>
+            </div>
+
+            <div class="category-card" data-category="physical">
+                <h2>Physical Activities</h2>
+                <div class="exercise-content">
+                    <ul class="activity-list">
+                        <li>Take a short walk</li>
+                        <li>Stretch your body</li>
+                        <li>Do some light yoga</li>
+                        <li>Practice deep breathing</li>
+                    </ul>
+                </div>
+            </div>
+
+            <div class="category-card" data-category="mental">
+                <h2>Mental Wellness</h2>
+                <div class="exercise-content">
+                    <ul class="wellness-list">
+                        <li>Practice gratitude</li>
+                        <li>Write in a journal</li>
+                        <li>Listen to calming music</li>
+                        <li>Take a digital break</li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+
+        <div class="stress-tips">
+            <h2>Quick Tips</h2>
+            <div class="tips-grid">
+                <div class="tip-card">
+                    <h3>Stay Hydrated</h3>
+                    <p>Drink water regularly to maintain energy levels</p>
+                </div>
+                <div class="tip-card">
+                    <h3>Take Breaks</h3>
+                    <p>Short breaks can help refresh your mind</p>
+                </div>
+                <div class="tip-card">
+                    <h3>Practice Mindfulness</h3>
+                    <p>Stay present and focus on the current moment</p>
+                </div>
+                <div class="tip-card">
+                    <h3>Get Fresh Air</h3>
+                    <p>Step outside for a few minutes</p>
+                </div>
+            </div>
+        </div>
+
+        <div class="emergency-section">
+            <h2>Need Immediate Help?</h2>
+            <p>If you're feeling overwhelmed, remember:</p>
+            <ul class="emergency-list">
+                <li>You're not alone</li>
+                <li>This feeling is temporary</li>
+                <li>Take one step at a time</li>
+                <li>Reach out to someone you trust</li>
+            </ul>
+        </div>
+
+        <div class="navigation">
+            <button id="backToMain" class="nav-btn">Back to Main</button>
+        </div>
+    </div>
+
+    <script src="stress.js"></script>
+</body>
+</html> 

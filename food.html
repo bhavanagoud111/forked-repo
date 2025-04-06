@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Mood Food - Food Recommendations Based on Your Mood</title>
+    <link rel="stylesheet" href="styles.css">
+    <link rel="stylesheet" href="food.css">
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+</head>
+<body>
+    <header>
+        <h1>Mood Food</h1>
+        <p>Discover recipes that match your mood</p>
+    </header>
+
+    <main>
+        <section class="mood-section">
+            <h2>How are you feeling today?</h2>
+            <div class="mood-options">
+                <button class="mood-btn" data-mood="happy">😊 Happy</button>
+                <button class="mood-btn" data-mood="sad">😢 Sad</button>
+                <button class="mood-btn" data-mood="anxious">😰 Anxious</button>
+                <button class="mood-btn" data-mood="angry">😠 Angry</button>
+                <button class="mood-btn" data-mood="stressed">😫 Stressed</button>
+                <button class="mood-btn" data-mood="energetic">⚡ Energetic</button>
+                <button class="mood-btn" data-mood="tired">😴 Tired</button>
+                <button class="mood-btn" data-mood="calm">😌 Calm</button>
+            </div>
+        </section>
+
+        <section class="food-recommendations">
+            <div class="output-card">
+                <h3>Recommended Recipes</h3>
+                <div id="recipeContainer" class="recipe-container">
+                    <!-- Recipes will be dynamically inserted here -->
+                </div>
+            </div>
+        </section>
+
+        <nav class="nav-buttons">
+            <button class="nav-btn" onclick="window.location.href='index.html'">Back to Home</button>
+        </nav>
+    </main>
+
+    <script src="food.js"></script>
+</body>
+</html> 
