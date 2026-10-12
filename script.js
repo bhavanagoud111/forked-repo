@@ -1,5 +1,5 @@
 // Get your Unsplash API key from: https://unsplash.com/developers
-const UNSPLASH_API_KEY = '5Mz3B3aHHefToYyJfBr55lE_sKA9TrNOeX9qHyttIAI'; // Replace with your Unsplash Access Key
+const UNSPLASH_API_KEY = 'YOUR_UNSPLASH_ACCESS_KEY'; // Put your own Unsplash Access Key here (see README > Configuration)
 
 // DOM Elements
 const moodInput = document.getElementById('moodInput');
